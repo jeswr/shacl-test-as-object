@@ -31,3 +31,4 @@ import { ProxiedNodeShapes } from 'shacl-test-as-object';
 
 Each of the resolved shapes conforms to the [rdf-object-proxy](https://github.com/jeswr/rdf-object-proxy) `ProxiedResource` API.
 
+For further examples refer the the [test suite](https://github.com/jeswr/shacl-test-as-object/blob/main/__tests__/main-tests.ts) for this library.
