@@ -1,0 +1,74 @@
+{
+  "name": "shacl-test-as-object",
+  "version": "1.0.0",
+  "description": "Returns list of SHACL constraints from test suite as resources",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint lib/*.ts __tests__/*.ts --ext .ts",
+    "lint:fix": "eslint lib/*.ts __tests__/*.ts --ext .ts --fix",
+    "build": "tsc",
+    "prepare": "tsc",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeswr/shacl-test-as-object.git"
+  },
+  "keywords": [
+    "SHACL",
+    "test",
+    "resource"
+  ],
+  "author": "Jesse Wright <jesse.wright@anu.edu.au>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeswr/shacl-test-as-object/issues"
+  },
+  "homepage": "https://github.com/jeswr/shacl-test-as-object#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "@types/n3": "^1.4.4",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "pre-commit": "^1.2.2",
+    "ts-jest": "^26.4.4"
+  },
+  "dependencies": {
+    "n3": "^1.7.0",
+    "rdf-object": "^1.8.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "pre-commit": [
+    "lint",
+    "build",
+    "test"
+  ],
+  "release": {
+    "branches": [
+      "main"
+    ]
+  }
+}
