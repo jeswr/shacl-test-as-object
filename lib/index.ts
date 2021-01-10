@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import { Parser } from 'n3';
 import { RdfObjectLoader, Resource } from 'rdf-object';
+import { ProxiedResource, RdfObjectProxy } from 'rdf-object-proxy';
 
 // The JSON-LD context for resolving properties
 const context = {
@@ -67,3 +68,9 @@ async function getEntries(base: string): Promise<Resource[]> {
  */
 const entries = getEntries(`file://${__dirname}/test-shapes/`);
 export default entries;
+
+async function getProxiedEntries(input: Promise<Resource[]>): Promise<ProxiedResource<string>[]> {
+  return (await input).map((entry) => RdfObjectProxy(entry));
+}
+
+export const ProxiedNodeShapes = getProxiedEntries(entries);

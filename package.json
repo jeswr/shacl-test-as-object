@@ -47,7 +47,8 @@
   },
   "dependencies": {
     "n3": "^1.7.0",
-    "rdf-object": "^1.8.0"
+    "rdf-object": "^1.8.0",
+    "rdf-object-proxy": "github:jeswr/rdf-object-proxy"
   },
   "jest": {
     "preset": "ts-jest",
