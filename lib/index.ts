@@ -22,9 +22,13 @@ function manifestPathToQuads(baseIRI: string) {
   if (!manifestPath.endsWith('.ttl')) {
     manifestPath += 'manifest.ttl';
   }
-  const turtle = fs.readFileSync(manifestPath).toString();
-  const quads = new Parser({ baseIRI }).parse(turtle);
-  return quads;
+  try {
+    const turtle = fs.readFileSync(manifestPath).toString();
+    const quads = new Parser({ baseIRI }).parse(turtle);
+    return quads;
+  } catch (e) {
+    return [];
+  }
 }
 
 // Gets each manifest entry
@@ -37,12 +41,14 @@ async function getEntries(base: string): Promise<Resource[]> {
   while (manifests.length > 0) {
     const tempManifestsString = [];
     for (const manifest of manifests) {
-      for (const entry of manifest.properties.entries) {
-        entries = [...entries, ...(entry.list ?? [])];
-      }
-      for (const include of manifest.properties.include) {
-        const includeString = `${include}`.replace('manifest.ttl', '');
-        tempManifestsString.push(includeString);
+      if (manifest) {
+        for (const entry of manifest.properties.entries) {
+          entries = [...entries, ...(entry.list ?? [])];
+        }
+        for (const include of manifest.properties.include) {
+          const includeString = `${include}`.replace('manifest.ttl', '');
+          tempManifestsString.push(includeString);
+        }
       }
     }
     const tempManifests = [];
