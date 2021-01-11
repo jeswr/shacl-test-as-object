@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import { Parser } from 'n3';
 import { RdfObjectLoader, Resource } from 'rdf-object';
 import { ProxiedResource, RdfObjectProxy } from 'rdf-object-proxy';
+import path from 'path';
 
 // The JSON-LD context for resolving properties
 const context = {
@@ -64,9 +65,9 @@ async function getEntries(base: string): Promise<Resource[]> {
 }
 
 /**
- * All NodeShapes in the SHACL test suite
+ * All NodeShapes in the SHACL (https://www.w3.org/ns/shacl#) test suite
  */
-const entries = getEntries(`file://${__dirname}/test-shapes/`);
+const entries = getEntries(`file://${path.join(__dirname, '..')}/test-shapes/`);
 export default entries;
 
 async function getProxiedEntries(input: Promise<Resource[]>): Promise<ProxiedResource<string>[]> {
