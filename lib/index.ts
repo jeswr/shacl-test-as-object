@@ -65,7 +65,7 @@ async function getEntries(base: string): Promise<Resource[]> {
 }
 
 /**
- * All NodeShapes in the SHACL test suite
+ * All NodeShapes in the SHACL (https://www.w3.org/ns/shacl#) test suite
  */
 const entries = getEntries(`file://${path.join(__dirname, '..')}/test-shapes/`);
 export default entries;
