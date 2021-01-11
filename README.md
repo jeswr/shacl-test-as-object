@@ -31,4 +31,6 @@ import { ProxiedNodeShapes } from 'shacl-test-as-object';
 
 Each of the resolved shapes conforms to the [rdf-object-proxy](https://github.com/jeswr/rdf-object-proxy) `ProxiedResource` API.
 
-For further examples refer the the [test suite](https://github.com/jeswr/shacl-test-as-object/blob/main/__tests__/main-tests.ts) for this library.
+For further examples refer the [test suite](https://github.com/jeswr/shacl-test-as-object/blob/main/__tests__/main-tests.ts) for this library.
+
+`getNodeShapes` and `getProxiedNodeShapes` can be used if one wishes to manually supply the path to the manifest file. See the [get test suite](https://github.com/jeswr/shacl-test-as-object/blob/main/__tests__/get-tests.ts) for usage.
