@@ -59,7 +59,9 @@
   "jest": {
     "preset": "ts-jest",
     "collectCoverage": true,
-    "modulePathIgnorePatterns": ["__tests__/integration-test.js"],
+    "modulePathIgnorePatterns": [
+      "__tests__/integration-test.js"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 90,

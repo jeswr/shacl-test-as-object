@@ -75,3 +75,6 @@ async function getProxiedEntries(input: Promise<Resource[]>): Promise<ProxiedRes
 }
 
 export const ProxiedNodeShapes = getProxiedEntries(entries);
+
+export const getNodeShapes = getEntries;
+export const getProxiedNodeShapes = getProxiedEntries;
