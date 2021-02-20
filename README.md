@@ -18,6 +18,7 @@ import NodeShapesPromise, { NodeShapesMapPromise } from 'shacl-test-as-object';
   for (const shape of NodeShapes) {
     /* Run test operation on shape here */
   }
+  
   const shape = NodeShapesMap['http://datashapes.org/sh/tests/core/complex/personexample.test#PersonShape']
   /* Run test operation on specific shape */
 })();
@@ -35,6 +36,7 @@ import { ProxiedNodeShapes, ProxiedNodeShapesMapPromise } from 'shacl-test-as-ob
   for (const shape of NodeShapes) {
     /* Run test operation on shape here */
   }
+  
   const shape = NodeShapesMap['http://datashapes.org/sh/tests/core/complex/personexample.test#PersonShape']
   /* Run test operation on specific shape */
 })();
