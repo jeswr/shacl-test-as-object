@@ -13,8 +13,8 @@
   ],
   "scripts": {
     "test": "jest && npm run electron",
-    "lint": "eslint lib/*.ts __tests__/*",
-    "lint:fix": "eslint lib/*.ts __tests__/* --fix",
+    "lint": "eslint lib/*.ts __tests__/*ts",
+    "lint:fix": "eslint lib/*.ts __tests__/*.ts --fix",
     "build:test": "tsc __tests__/integration-test.ts",
     "electron": "electron __tests__/integration-test.js",
     "build": "tsc",
@@ -54,7 +54,7 @@
   "dependencies": {
     "n3": "^1.8.0",
     "rdf-object": "^1.8.0",
-    "rdf-object-proxy": "github:jeswr/rdf-object-proxy"
+    "rdf-object-proxy": "^1.0.0"
   },
   "jest": {
     "preset": "ts-jest",
