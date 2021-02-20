@@ -71,16 +71,31 @@ async function getEntries(base: string): Promise<Resource[]> {
 }
 
 /**
+ * Coverts an array of shapes to a map of shapes
+ */
+export function toMap<
+  T extends Resource | ProxiedResource<string>
+>(array: T[]): Record<string, T> {
+  const record: Record<string, T> = {};
+  for (const elem of array) {
+    record[elem.term.value] = elem;
+  }
+  return record;
+}
+
+/**
  * All NodeShapes in the SHACL (https://www.w3.org/ns/shacl#) test suite
  */
 const entries = getEntries(`file://${path.join(__dirname, '..')}/test-shapes/`);
 export default entries;
+export const NodeShapesMapPromise = (async () => toMap(await entries))();
 
 async function getProxiedEntries(input: Promise<Resource[]>): Promise<ProxiedResource<string>[]> {
   return (await input).map((entry) => RdfObjectProxy(entry));
 }
 
 export const ProxiedNodeShapes = getProxiedEntries(entries);
+export const ProxiedNodeShapesMapPromise = (async () => toMap(await ProxiedNodeShapes))();
 
 export const getNodeShapes = getEntries;
 export const getProxiedNodeShapes = getProxiedEntries;

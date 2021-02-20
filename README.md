@@ -10,13 +10,16 @@ Returns list of SHACL constraints from test suite as resources
 ## Usage
 
 ```ts
-import NodeShapesPromise from 'shacl-test-as-object';
+import NodeShapesPromise, { NodeShapesMapPromise } from 'shacl-test-as-object';
 
 (async () => {
   const NodeShapes = await NodeShapesPromise;
+  const NodeShapesMap = await NodeShapesMapPromise;
   for (const shape of NodeShapes) {
     /* Run test operation on shape here */
   }
+  const shape = NodeShapesMap['http://datashapes.org/sh/tests/core/complex/personexample.test#PersonShape']
+  /* Run test operation on specific shape */
 })();
 
 ```
@@ -24,13 +27,16 @@ import NodeShapesPromise from 'shacl-test-as-object';
 Each of the resolved shapes conforms to the [rdf-object.js](https://github.com/rubensworks/rdf-object.js) `Resource` API.
 
 ```ts
-import { ProxiedNodeShapes } from 'shacl-test-as-object';
+import { ProxiedNodeShapes, ProxiedNodeShapesMapPromise } from 'shacl-test-as-object';
 
 (async () => {
   const NodeShapes = await ProxiedNodeShapes;
+  const NodeShapesMap = await ProxiedNodeShapesMapPromise;
   for (const shape of NodeShapes) {
     /* Run test operation on shape here */
   }
+  const shape = NodeShapesMap['http://datashapes.org/sh/tests/core/complex/personexample.test#PersonShape']
+  /* Run test operation on specific shape */
 })();
 
 ```
