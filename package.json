@@ -12,7 +12,7 @@
     "test-shapes"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest && npm run electron",
     "lint": "eslint lib/*.ts __tests__/*ts",
     "lint:fix": "eslint lib/*.ts __tests__/*.ts --fix",
     "build:test": "tsc __tests__/integration-test.ts",
