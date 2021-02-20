@@ -10,7 +10,7 @@ Returns list of SHACL constraints from test suite as resources
 ## Usage
 
 ```ts
-import NodeShapesPromise from '@jeswr/shacl-test-as-object';
+import NodeShapesPromise from 'shacl-test-as-object';
 
 (async () => {
   const NodeShapes = await NodeShapesPromise;
@@ -24,7 +24,7 @@ import NodeShapesPromise from '@jeswr/shacl-test-as-object';
 Each of the resolved shapes conforms to the [rdf-object.js](https://github.com/rubensworks/rdf-object.js) `Resource` API.
 
 ```ts
-import { ProxiedNodeShapes } from '@jeswr/shacl-test-as-object';
+import { ProxiedNodeShapes } from 'shacl-test-as-object';
 
 (async () => {
   const NodeShapes = await ProxiedNodeShapes;
