@@ -1,7 +1,11 @@
 import * as fs from 'fs';
-import { Parser } from 'n3';
+import { Parser, Quad, Store } from 'n3';
+import inferencer from 'sparql-inferenced';
+import { owl2rl } from 'hylar-core';
+import constructs from 'construct-inferences-shacl';
 import { RdfObjectLoader, Resource } from 'rdf-object';
 import { ProxiedResource, RdfObjectProxy } from 'rdf-object-proxy';
+import { array } from '@on2ts/ontologies-sh';
 import path from 'path';
 
 // The JSON-LD context for resolving properties
@@ -31,10 +35,30 @@ function manifestPathToQuads(baseIRI: string) {
   }
 }
 
+async function inferenceConstraint(quads: Quad[]) {
+  const implicit = new Store();
+  const explicit = new Store();
+  await inferencer(
+    [...(await array()), ...quads],
+    [],
+    explicit,
+    implicit,
+    owl2rl,
+    constructs,
+  );
+  return [
+    ...implicit.getQuads(null, null, null, null),
+    ...explicit.getQuads(null, null, null, null),
+  ];
+}
+
 // Gets each manifest entry
-async function getEntries(base: string): Promise<Resource[]> {
+async function getEntries(base: string, inference = false): Promise<Resource[]> {
   const loader = new RdfObjectLoader({ context });
-  const quads = manifestPathToQuads(base);
+  let quads = manifestPathToQuads(base);
+  if (inference) {
+    quads = await inferenceConstraint(quads);
+  }
   await loader.importArray(quads);
   let manifests = [loader.resources[base]];
   let entries: Resource[] = [];
@@ -75,9 +99,9 @@ async function getEntries(base: string): Promise<Resource[]> {
  */
 export function toMap<
   T extends Resource | ProxiedResource<string>
->(array: T[]): Record<string, T> {
+>(arr: T[]): Record<string, T> {
   const record: Record<string, T> = {};
-  for (const elem of array) {
+  for (const elem of arr) {
     record[elem.term.value] = elem;
   }
   return record;
@@ -87,8 +111,11 @@ export function toMap<
  * All NodeShapes in the SHACL (https://www.w3.org/ns/shacl#) test suite
  */
 const entries = getEntries(`file://${path.join(__dirname, '..')}/test-shapes/`);
+export const inferencedEntries = getEntries(`file://${path.join(__dirname, '..')}/test-shapes/`, true);
+
 export default entries;
 export const NodeShapesMapPromise = (async () => toMap(await entries))();
+export const InferencedNodeShapesMapPromise = (async () => toMap(await inferencedEntries))();
 
 async function getProxiedEntries(input: Promise<Resource[]>): Promise<ProxiedResource<string>[]> {
   return (await input).map((entry) => RdfObjectProxy(entry));
@@ -96,6 +123,11 @@ async function getProxiedEntries(input: Promise<Resource[]>): Promise<ProxiedRes
 
 export const ProxiedNodeShapes = getProxiedEntries(entries);
 export const ProxiedNodeShapesMapPromise = (async () => toMap(await ProxiedNodeShapes))();
+
+export const InferencedProxiedNodeShapes = getProxiedEntries(inferencedEntries);
+export const InferencedProxiedNodeShapesMapPromise = (
+  async () => toMap(await InferencedProxiedNodeShapes)
+)();
 
 export const getNodeShapes = getEntries;
 export const getProxiedNodeShapes = getProxiedEntries;
