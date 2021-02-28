@@ -49,6 +49,28 @@ For further examples refer the [test suite](https://github.com/jeswr/shacl-test-
 
 `getNodeShapes` and `getProxiedNodeShapes` can be used if one wishes to manually supply the path to the manifest file. See the [get test suite](https://github.com/jeswr/shacl-test-as-object/blob/main/__tests__/get-tests.ts) for usage.
 
+## Inferenced Shapes
+
+Inferenced versions of these objects are also exposed. Inferencing is performed using [sparql-inferenced](https://github.com/jeswr/sparql-inferenced) over the SHACL ontology, and these [specific shacl inferences](https://github.com/on2ts/construct-inferences-shacl).
+
+The inferenced shapes can be accessed similarly to the other objects
+
+```ts
+import { InferencedProxiedNodeShapes, InferencedProxiedNodeShapesMapPromise } from 'shacl-test-as-object';
+
+(async () => {
+  const NodeShapes = await InferencedProxiedNodeShapes;
+  const NodeShapesMap = await InferencedProxiedNodeShapesMapPromise;
+  for (const shape of NodeShapes) {
+    /* Run test operation on shape here */
+  }
+  
+  const shape = NodeShapesMap['http://datashapes.org/sh/tests/core/complex/personexample.test#PersonShape']
+  /* Run test operation on specific shape */
+})();
+
+```
+
 ## License
 ©2021–present
 [Jesse Wright](https://github.com/jeswr),
