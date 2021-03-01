@@ -55,7 +55,7 @@
   "dependencies": {
     "@on2ts/ontologies-context": "^1.0.5",
     "@on2ts/ontologies-sh": "^1.0.5",
-    "construct-inferences-shacl": "^1.0.1",
+    "construct-inferences-shacl": "^1.1.0",
     "hylar-core": "^1.1.0",
     "n3": "^1.8.0",
     "rdf-object": "^1.8.0",
