@@ -40,7 +40,8 @@
     "@rdfjs/data-model": "^1.2.0",
     "@types/electron": "^1.6.10",
     "@types/jest": "^26.0.20",
-    "@types/n3": "^1.4.4",
+    "@types/jsonld": "^1.5.5",
+    "@types/n3": "^1.4.5",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.15.1",
     "electron": "^12.0.0",
@@ -48,6 +49,9 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "jest": "^26.6.3",
+    "jsonld": "^5.0.0",
+    "jsonld-streaming-serializer": "^1.2.0",
+    "n3": "^1.9.0",
     "pre-commit": "^1.2.2",
     "ts-jest": "^26.5.1",
     "typescript": "^4.1.5"
@@ -57,7 +61,6 @@
     "@on2ts/ontologies-sh": "^1.0.5",
     "construct-inferences-shacl": "^1.1.0",
     "hylar-core": "^1.1.0",
-    "n3": "^1.8.0",
     "rdf-object": "^1.8.0",
     "rdf-object-proxy": "^1.0.0",
     "sparql-inferenced": "^1.0.1"

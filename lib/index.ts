@@ -53,7 +53,7 @@ async function inferenceConstraint(quads: Quad[]) {
 }
 
 // Gets each manifest entry
-async function getEntries(base: string, inference = false): Promise<Resource[]> {
+export async function getEntries(base: string, inference = false): Promise<Resource[]> {
   const loader = new RdfObjectLoader({ context });
   let quads = manifestPathToQuads(base);
   if (inference) {
