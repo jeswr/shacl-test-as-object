@@ -2,9 +2,9 @@
 import fs from 'fs';
 import path from 'path';
 import { JsonLdSerializer } from 'jsonld-streaming-serializer';
-import { quad } from '@rdfjs/data-model';
+import dataFactory from '@rdfjs/data-model';
+import md5 from 'md5';
 import entries from '../lib';
-import { Quad } from 'n3';
 
 const base = path.join(__dirname, '..', 'test-shapes-jsonld');
 
@@ -14,28 +14,35 @@ try {
 
 fs.mkdirSync(base);
 
+const index: Record<string, string> = {};
+
 entries.then((resources) => {
-  resources.forEach(async (resource) => {
-    try {
-      const writeStream = fs.createWriteStream(
-        path.join(base, `${/[a-z]+$/i.exec(resource.value)?.[0] ?? ''}.jsonld`),
-      );
-      const mySerializer = new JsonLdSerializer({ space: '  ' });
-      mySerializer.on('data', (data) => { writeStream.write(data); });
-      mySerializer.on('end', () => { writeStream.end(); });
-      mySerializer.on('error', () => {
-        console.log('error');
-      });
-      const quads = resource.toQuads().map(
-        // TODO [FUTURE]: Remove type casting
-        (b) => quad(b.subject as any, b.predicate as any, b.object as any),
-        // TODO [FUTURE]: REMOVE ANY
-      ).filter((q: any) => q.graph.termType !== undefined);
-      // console.log(quads);
-      mySerializer.write(quads);
-      mySerializer.end();
-    } catch (e) {
-      console.log('error');
-    }
+  resources.forEach((resource) => {
+    const justName = `${/[a-z]+$/i.exec(resource.value)?.[0] ?? ''}-${md5(resource.value)}.jsonld`;
+    const name = path.join(base, justName);
+    index[resource.value] = justName;
+    const writeStream = fs.createWriteStream(name);
+    const mySerializer = new JsonLdSerializer({ space: '  ', context: {} });
+    mySerializer.on('data', (data) => { writeStream.write(data); });
+    mySerializer.on('end', () => {
+      writeStream.end();
+      writeStream.close();
+    });
+    mySerializer.on('error', () => { console.log('error'); });
+    resource.toQuads([], dataFactory).forEach((q) => mySerializer.write(q));
+    mySerializer.end();
+    writeStream.on('close', () => {
+      // try {
+      //   // eslint-disable-next-line import/no-dynamic-require, global-require
+      //   require(name);
+      // } catch (e) {
+      //   console.log(`error emitting${name}`);
+      //   try {
+      //     fs.rmSync(name);
+      //   } catch (err) {}
+      // }
+    });
   });
+}).then(() => {
+  fs.writeFileSync(path.join(base, 'index.json'), JSON.stringify(index, null, 2));
 });
