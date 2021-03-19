@@ -1,0 +1,27 @@
+{
+  "name": "shacl-test-as-object-browser",
+  "version": "1.3.0",
+  "description": "Returns list of SHACL constraints from test suite as resources (for use in Browsers)",
+  "author": "jeswr <jesse.wright@anu.edu.au>",
+  "homepage": "https://github.com/jeswr/shacl-test-as-object/tree/master/packages/shacl-test-as-object-browser#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "dist",
+    "test-shapes-jsonld"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeswr/shacl-test-as-object.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/jeswr/shacl-test-as-object/issues"
+  }
+}

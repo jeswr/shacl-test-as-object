@@ -6,7 +6,7 @@ import dataFactory from '@rdfjs/data-model';
 import md5 from 'md5';
 import entries from '../lib';
 
-const base = path.join(__dirname, '..', 'test-shapes-jsonld');
+const base = path.join(__dirname, '..', 'packages', 'shacl-test-as-object-browser', 'test-shapes-jsonld');
 
 try {
   fs.rmSync(base, { recursive: true });
