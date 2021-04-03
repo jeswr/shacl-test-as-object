@@ -19,9 +19,14 @@
     "url": "git+https://github.com/jeswr/shacl-test-as-object.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "tsc": "tsc",
+    "build": "tsc",
+    "prepublishOnly": "tsc"
   },
   "bugs": {
     "url": "https://github.com/jeswr/shacl-test-as-object/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
