@@ -23,7 +23,7 @@ jobs:
         run: |
           git config --global user.name '@jeswr'
           git config --global user.email 'jesse.wright@anu.edu.au'
-          git remote set-url origin https://$GITHUB_ACTOR:$GITHUB_PAT@github.com/schimatos/ldfields
+          git remote set-url origin https://$GITHUB_ACTOR:$GITHUB_PAT@github.com/jeswr/shacl-test-as-object
         env:
           GITHUB_PAT: ${{ secrets.GH_TOKEN }}
 

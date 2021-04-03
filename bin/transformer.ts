@@ -4,7 +4,7 @@ import path from 'path';
 import { JsonLdSerializer } from 'jsonld-streaming-serializer';
 import dataFactory from '@rdfjs/data-model';
 import md5 from 'md5';
-import entries from '../lib';
+import entries from '../packages/shacl-test-as-object/lib';
 
 const base = path.join(__dirname, '..', 'packages', 'shacl-test-as-object-browser', 'test-shapes-jsonld');
 
@@ -18,7 +18,7 @@ const index: Record<string, string> = {};
 
 entries.then((resources) => {
   resources.forEach((resource) => {
-    const justName = `${/[a-z]+$/i.exec(resource.value)?.[0] ?? ''}-${md5(resource.value)}.jsonld`;
+    const justName = `${/[a-z0-9]+$/i.exec(resource.value)?.[0] ?? ''}-${md5(resource.value)}.jsonld`;
     const name = path.join(base, justName);
     index[resource.value] = justName;
     const writeStream = fs.createWriteStream(name);

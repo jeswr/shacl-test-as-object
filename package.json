@@ -17,10 +17,11 @@
     "lint:fix": "eslint lib/*.ts __tests__/*.ts --fix",
     "build:test": "tsc __tests__/integration-test.ts",
     "electron": "electron __tests__/integration-test.js",
-    "build": "build:jsonld && tsc",
+    "build": "npm run build:jsonld && lerna bootstrap",
     "build:jsonld": "ts-node bin/transformer.ts",
     "prepare": "npm run build",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "postinstall": "npm run build && lerna run build"
   },
   "repository": {
     "type": "git",
