@@ -28,5 +28,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@on2ts/ontologies-utils": "^1.0.16",
+    "rdf-object-proxy": "^1.0.0"
   }
 }

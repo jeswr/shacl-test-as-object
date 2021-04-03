@@ -104,3 +104,4 @@ dist
 .tern-port
 
 test-shapes-jsonld/
+test-shapes-inferenced-jsonld/

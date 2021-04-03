@@ -13,8 +13,8 @@
   ],
   "scripts": {
     "test": "jest",
-    "lint": "eslint lib/*.ts __tests__/*ts",
-    "lint:fix": "eslint lib/*.ts __tests__/*.ts --fix",
+    "lint": "eslint **/**.ts",
+    "lint:fix": "eslint **/**.ts --fix",
     "build:test": "tsc __tests__/integration-test.ts",
     "electron": "electron __tests__/integration-test.js",
     "build": "npm run build:jsonld && lerna bootstrap",
