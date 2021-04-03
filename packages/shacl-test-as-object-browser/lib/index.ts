@@ -21,7 +21,12 @@ export async function getEntries(location: string, idx: { [key: string]: string 
   let entries: Resource[] = [];
   for (const key in idx) {
     const loader = new RdfObjectLoader({ context });
-    await loader.importArray(await arrayFactory(require(`./${location}/${idx[key]}`))());
+    console.log('pre require', `./${location}/${idx[key]}`)
+    const imported = require(`./${location}/${idx[key]}`);
+    console.log(imported)
+    const arrayified = await arrayFactory(imported)();
+    console.log(arrayified)
+    await loader.importArray(arrayified);
     entries.push(loader.resources[key]);
   }
   return entries

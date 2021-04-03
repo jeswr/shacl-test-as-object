@@ -21,7 +21,8 @@
   "scripts": {
     "tsc": "tsc",
     "build": "tsc",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc",
+    "test": "jest"
   },
   "bugs": {
     "url": "https://github.com/jeswr/shacl-test-as-object/issues"
