@@ -1,6 +1,8 @@
 import path from 'path';
 import { getNodeShapes, getProxiedNodeShapes } from '../lib';
 
+jest.useFakeTimers();
+
 describe('It loads the node shapes', () => {
   it('Should have a first entry that is a NodeShape', async () => {
     const [shape] = await getNodeShapes(`file://${path.join(__dirname)}/test-shapes-non-list-entry/`);

@@ -1,5 +1,7 @@
 import shapes, { ProxiedNodeShapes } from '../lib';
 
+jest.useFakeTimers();
+
 describe('It loads the node shapes', () => {
   it('Should have a first entry that is a NodeShape', async () => {
     const [shape] = await shapes;
