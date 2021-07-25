@@ -38,7 +38,6 @@
   "homepage": "https://github.com/jeswr/shacl-test-as-object#readme",
   "devDependencies": {
     "@rdfjs/data-model": "^1.2.0",
-    "@types/electron": "^1.6.10",
     "@types/jest": "^26.0.20",
     "@types/n3": "^1.4.4",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
